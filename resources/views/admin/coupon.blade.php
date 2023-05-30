@@ -1,12 +1,12 @@
 @extends('admin/layout')
-@section('page_title','Category')
-@section('category_select','active')
+@section('page_title','Coupon')
+@section('coupon_select','active')
 @section('container')
     {{session('message')}}                          
-    <h1 class="mb10">Category</h1>
-    <a href="category/manage_category">
+    <h1 class="mb10">Coupon</h1>
+    <a href="{{url('admin/coupon/manage_coupon')}}">
         <button type="button" class="btn btn-success">
-            Add Category
+            Add Coupon
         </button>
     </a>
     <div class="row m-t-30">
@@ -17,8 +17,9 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Category Name</th>
-                            <th>Category Slug</th>
+                            <th>Title</th>
+                            <th>Code</th>
+                            <th>Value</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -26,18 +27,20 @@
                         @foreach($data as $list)
                         <tr>
                             <td>{{$list->id}}</td>
-                            <td>{{$list->category_name}}</td>
-                            <td>{{$list->category_slug}}</td>
+                            <td>{{$list->title}}</td>
+                            <td>{{$list->code}}</td>
+                            <td>{{$list->value}}</td>
                             <td>
-                                <a href="{{url('admin/category/manage_category/')}}/{{$list->id}}"><button type="button" class="btn btn-success">Edit</button></a>
+                                <a href="{{url('admin/coupon/manage_coupon/')}}/{{$list->id}}"><button type="button" class="btn btn-success">Edit</button></a>
 
                                 @if($list->status==1)
-                                    <a href="{{url('admin/category/status/0')}}/{{$list->id}}"><button type="button" class="btn btn-primary">Active</button></a>
+                                    <a href="{{url('admin/coupon/status/0')}}/{{$list->id}}"><button type="button" class="btn btn-primary">Active</button></a>
                                  @elseif($list->status==0)
-                                    <a href="{{url('admin/category/status/1')}}/{{$list->id}}"><button type="button" class="btn btn-warning">Deactive</button></a>
+                                    <a href="{{url('admin/coupon/status/1')}}/{{$list->id}}"><button type="button" class="btn btn-warning">Deactive</button></a>
                                 @endif
-
-                                <a href="{{url('admin/category/delete/')}}/{{$list->id}}"><button type="button" class="btn btn-danger">Delete</button></a>
+                                
+                                <a href="{{url('admin/coupon/delete/')}}/{{$list->id}}"><button type="button" class="btn btn-danger">Delete</button></a>
+                                
                             </td>
                         </tr>
                         @endforeach
